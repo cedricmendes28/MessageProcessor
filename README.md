@@ -14,8 +14,9 @@ These commands will install any needed dependencies, build the project, and run 
 Once the application is up and running, navigate to [https://localhost:5001/swagger/index.html](https://localhost:5001/swagger/index.html) to access Swagger UI and to interact with the API endpoints.
 
 ### Create a Message
+This request validates whether the input is in one of the accepted json formats. If the json schema is valid, the message will be stored in the database or else the enpoint will return appropriate error.
 
-#### Sample request
+#### Request
 `POST /api/Messaging`
 ```bash
 {
@@ -24,6 +25,34 @@ Once the application is up and running, navigate to [https://localhost:5001/swag
   "type": "text",
   "text": "Hello",
   "sendTime": "2021-08-23 09:00"
+}
+```
+
+```bash
+{
+  "message": 
+  {
+    "type": "text",
+    "id": "4e9faf2b-325c-41e5-9db1-642d4d94b43f",
+    "text": "Hello"
+  },
+  "source": 
+  {
+    "type": "user",
+    "userId": "qwerty"
+  },
+  "timestamp": 1629680508
+}
+```
+
+```bash
+{
+  "msisdn": "6588882222",
+  "message": 
+  {
+    "msgText": "Hello",
+    "msgTime": "2021-08-23 09:00"
+  }
 }
 ```
 
