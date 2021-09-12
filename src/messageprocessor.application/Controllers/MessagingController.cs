@@ -43,7 +43,7 @@ namespace MessageProcessor.Application.Controllers
 
                 await _messageRepository.CreateAsync(message);
 
-                return Ok();
+                return StatusCode(StatusCodes.Status201Created);
             }
             catch (MessageParsingException msgEx)
             {
@@ -59,28 +59,6 @@ namespace MessageProcessor.Application.Controllers
 
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
-                    e.Message);
-            }
-        }
-
-        /// <summary>
-        /// Retrieves all the messages from database
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [ProducesResponseType(typeof(Message), StatusCodes.Status200OK)]
-        public async Task<ActionResult<Message>> GetAll()
-        {
-            try
-            {
-                return Ok(await _messageRepository.GetAllAsync());
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.ToString());
-
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError, 
                     e.Message);
             }
         }
